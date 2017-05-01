@@ -222,7 +222,7 @@ open class BTNavigationDropdownMenu: UIView {
     
     open var didSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
     open var isShown: Bool!
-
+    
     fileprivate weak var navigationController: UINavigationController?
     fileprivate var configuration = BTConfiguration()
     fileprivate var topSeparator: UIView!
@@ -451,7 +451,7 @@ open class BTNavigationDropdownMenu: UIView {
                 }
         })
     }
-    
+
     func rotateArrow() {
         UIView.animate(withDuration: self.configuration.animationDuration, animations: {[weak self] () -> () in
             if let selfie = self {
@@ -459,9 +459,13 @@ open class BTNavigationDropdownMenu: UIView {
             }
             })
     }
-    
+
     open func setMenuTitle(_ title: String) {
         self.menuTitle.text = title
+    }
+    
+    open func setSelectedIndexPath(index: Int) {
+        self.tableView.setSelectedIndexPath = index
     }
     
     func menuButtonTapped(_ sender: UIButton) {
@@ -558,10 +562,6 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         self.tableFooterView = UIView(frame: CGRect.zero)
     }
 
-    func setSelectedIndexPath(index: Int) {
-        self.selectedIndexPath = index
-    }
-    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let hitView = super.hitTest(point, with: event) , hitView.isKind(of: BTTableCellContentView.self) {
             return hitView
