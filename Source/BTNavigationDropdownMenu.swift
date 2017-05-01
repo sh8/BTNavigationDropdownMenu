@@ -557,6 +557,10 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         self.autoresizingMask = UIViewAutoresizing.flexibleWidth
         self.tableFooterView = UIView(frame: CGRect.zero)
     }
+
+    func setSelectedIndexPath(index: Int) {
+        self.selectedIndexPath = index
+    }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let hitView = super.hitTest(point, with: event) , hitView.isKind(of: BTTableCellContentView.self) {
