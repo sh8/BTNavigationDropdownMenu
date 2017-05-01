@@ -231,14 +231,14 @@ open class BTNavigationDropdownMenu: UIView {
     fileprivate var menuArrow: UIImageView!
     fileprivate var backgroundView: UIView!
     fileprivate var tableView: BTTableView!
-    fileprivate var items: [AnyObject]!
+    fileprivate var items: [String]!
     fileprivate var menuWrapper: UIView!
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: String, items: [AnyObject]) {
+    public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: String, items: [String]) {
         // Key window
         guard let window = UIApplication.shared.keyWindow else {
             super.init(frame: CGRect.zero)
@@ -359,7 +359,7 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
     
-    open func updateItems(_ items: [AnyObject]) {
+    open func updateItems(_ items: [String]) {
         if !items.isEmpty {
             self.tableView.items = items
             self.tableView.reloadData()
@@ -460,7 +460,7 @@ open class BTNavigationDropdownMenu: UIView {
             })
     }
     
-    func setMenuTitle(_ title: String) {
+    open func setMenuTitle(_ title: String) {
         self.menuTitle.text = title
     }
     
@@ -534,18 +534,18 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     var selectRowAtIndexPathHandler: ((_ indexPath: Int) -> ())?
     
     // Private properties
-    fileprivate var items: [AnyObject]!
+    fileprivate var items: [String]!
     fileprivate var selectedIndexPath: Int?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame: CGRect, items: [AnyObject], title: String, configuration: BTConfiguration) {
+    init(frame: CGRect, items: [String], title: String, configuration: BTConfiguration) {
         super.init(frame: frame, style: UITableViewStyle.plain)
         
         self.items = items
-        self.selectedIndexPath = (items as! [String]).index(of: title)
+        self.selectedIndexPath = (items).index(of: title)
         self.configuration = configuration
         
         // Setup table view
